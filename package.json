@@ -4,6 +4,7 @@
   "homepage": "https://nuttapon.github.io/aboutme",
   "private": true,
   "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -17,8 +18,11 @@
     "framer-motion": "^6.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.47.0",
     "react-icons": "^3.11.0",
+    "react-router-dom": "^6.17.0",
     "react-scripts": "5.0.1",
+    "styled-components": "^6.1.0",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
