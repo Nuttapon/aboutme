@@ -17,7 +17,7 @@ import thaiIdCard from './ThaiIdCard';
 export default function IdCardGenerator() {
   const { handleSubmit } = useForm();
   const [isLoading, setIsLoading] = useState(false);
-  const [idCard, setIdCard] = useState("X-XXXX-XXXXX-XX-X");
+  const [idCard, setIdCard] = useState("XXXXXXXXXXXXX");
   const toast = useToast();
   
   const copyToClipboard = () => {
@@ -35,7 +35,7 @@ export default function IdCardGenerator() {
     setIsLoading(true);
     const idCard = thaiIdCard.generate();
 
-    setIdCard(formatIdCard(idCard));
+    setIdCard(idCard);
 
     setIsLoading(false);
   };
@@ -46,11 +46,11 @@ export default function IdCardGenerator() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Box paddingTop={5}>
             <Stack spacing={3}>
-              <FormLabel textAlign={"center"}>ID Card Generator</FormLabel>
+              <FormLabel textAlign={"center"}>ID Card Generator (ONLY Testing)</FormLabel>
               <Input
                 id="id-card-generator"
                 value={idCard}
-                placeholder="X-XXXX-XXXXX-XX-X"
+                placeholder="XXXXXXXXXXXXX"
                 readOnly
                 style={{width: 'fit-content', textAlign: 'center'}}
                 marginLeft="auto"
@@ -75,8 +75,4 @@ export default function IdCardGenerator() {
       </Box>
     </Box>
   )
-}
-
-function formatIdCard(idCard: string) {
-  return idCard.replace(/(\d{1})(\d{4})(\d{5})(\d{2})(\d{1})/, "$1-$2-$3-$4-$5");
 }
