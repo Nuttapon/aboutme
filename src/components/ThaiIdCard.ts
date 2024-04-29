@@ -1,6 +1,6 @@
 type ThaiIdCard = {
   verify: (id: string) => boolean;
-  generate: () => string;
+  generate: (personType: 'individual' | 'juristic') => string;
 };
 
 const thaiIdCard: ThaiIdCard = {
@@ -16,10 +16,10 @@ const thaiIdCard: ThaiIdCard = {
     return check === parseInt(id.charAt(12));
   },
 
-  generate: () => {
-    let id = '';
-    let sum = 0;
-    for (let i = 0; i < 12; i++) {
+  generate: (personType) => {
+    let id = personType === 'individual' ? `${Math.floor(Math.random() * 8) + 1}` : '0';
+    let sum = parseInt(id) * 13;
+    for (let i = 1; i < 12; i++) {
       const digit = Math.floor(Math.random() * 10);
       id += digit.toString();
       sum += digit * (13 - i);

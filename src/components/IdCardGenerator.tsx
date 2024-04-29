@@ -6,6 +6,8 @@ import {
   Button,
   FormLabel,
   Input,
+  Radio,
+  RadioGroup,
   Spinner,
   Stack,
   useToast,
@@ -13,13 +15,15 @@ import {
 
 import thaiIdCard from './ThaiIdCard';
 
+type PersonType = 'individual' | 'juristic';
 
 export default function IdCardGenerator() {
   const { handleSubmit } = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [idCard, setIdCard] = useState("XXXXXXXXXXXXX");
+  const [personType, setPersonType] = useState<PersonType>('individual');
   const toast = useToast();
-  
+
   const copyToClipboard = () => {
     navigator.clipboard.writeText(idCard);
     toast({
@@ -33,10 +37,7 @@ export default function IdCardGenerator() {
 
   const onSubmit = async () => {
     setIsLoading(true);
-    const idCard = thaiIdCard.generate();
-
-    setIdCard(idCard);
-
+    setIdCard(thaiIdCard.generate(personType));
     setIsLoading(false);
   };
 
@@ -47,15 +48,21 @@ export default function IdCardGenerator() {
           <Box paddingTop={5}>
             <Stack spacing={3}>
               <FormLabel textAlign={"center"}>ID Card Generator (ONLY Testing)</FormLabel>
+              <RadioGroup onChange={(nextValue) => setPersonType(nextValue as PersonType)} value={personType}>
+                <Stack direction="row" justifyContent="center">
+                  <Radio value="individual">Individual</Radio>
+                  <Radio value="juristic">Juristic</Radio>
+                </Stack>
+              </RadioGroup>
               <Input
                 id="id-card-generator"
                 value={idCard}
                 placeholder="XXXXXXXXXXXXX"
                 readOnly
-                style={{width: 'fit-content', textAlign: 'center'}}
+                style={{ width: 'fit-content', textAlign: 'center' }}
                 marginLeft="auto"
                 marginRight="auto"
-                onClick={copyToClipboard}              
+                onClick={copyToClipboard}
               />
               <Box display="flex" flexDirection="row" justifyContent="center">
                 <Button
